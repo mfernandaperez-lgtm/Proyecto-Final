@@ -1,0 +1,219 @@
+/* ---------------------------------------------
+   PALETA DE COLORES – ESTILO FEMENINO
+--------------------------------------------- */
+:root {
+  --rosa: #f7c6d9;
+  --rosa-suave: #ffe8f1;
+  --lavanda: #d9c7ff;
+  --blanco: #ffffff;
+  --gris: #555;
+  --gris-claro: #999;
+  --sombra: rgba(0,0,0,0.08);
+  --borde: rgba(255, 182, 193, 0.5);
+  --primary: #ff7eb9;
+}
+
+/* --------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: var(--rosa-suave);
+  color: var(--gris);
+  padding-top: 110px; /* Para que el header fijo no tape el contenido */
+}
+
+/* ---------------------------------------------
+   HEADER FIJO
+--------------------------------------------- */
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--rosa);
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid var(--borde);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+#header h1 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--gris);
+}
+
+/* ---------------------------------------------
+   LOGIN EN HEADER
+--------------------------------------------- */
+#login-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#login-area input {
+  width: 150px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 2px solid var(--borde);
+}
+
+#login-area input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 6px rgba(255, 126, 185, 0.4);
+}
+
+#login-area button {
+  padding: 8px 15px;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#login-area button:hover {
+  background: #ff5aa0;
+}
+
+#user-info span {
+  padding-right: 10px;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------
+   TÍTULO DE SECCIÓN
+--------------------------------------------- */
+.titulo-seccion {
+  margin-left: 20px;
+  font-size: 1.6rem;
+  color: var(--gris);
+  margin-top: 10px;
+}
+
+/* ---------------------------------------------
+   GRID DE PRODUCTOS
+--------------------------------------------- */
+#catalogo-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+  padding: 20px;
+}
+
+/* ---------------------------------------------
+   TARJETAS DE PRODUCTO
+--------------------------------------------- */
+.card {
+  background: var(--blanco);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px var(--sombra);
+  border: 2px solid var(--borde);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.card img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: var(--gris-claro);
+  margin-bottom: 15px;
+}
+
+.card .meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  padding: 8px 15px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #ff5aa0;
+}
+
+/* ---------------------------------------------
+   CARRITO FIJO A LA DERECHA
+--------------------------------------------- */
+#carrito {
+  position: fixed;
+  top: 120px;
+  right: 20px;
+  width: 340px;
+  background: var(--blanco);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  border: 2px solid var(--borde);
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 900;
+}
+
+.carrito-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--borde);
+  gap: 10px;
+}
+
+.carrito-item img {
+  width: 55px;
+  height: 55px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.carrito-item-controls button {
+  margin-left: 5px;
+}
+
+#vaciar-carrito {
+  width: 100%;
+  background: #ff94c2;
+  color: white;
+}
+
+#vaciar-carrito:hover {
+  background: #ff6ba6;
+}
