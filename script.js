@@ -48,7 +48,7 @@ const productosES = {
     description: "Bocina con sonido potente y diseño resistente al agua. Perfecta para exteriores."
   },
   13: {
-    title: "computadora portátil ultraligera de alto rendimiento",
+    title: "Computadora portátil ultraligera de alto rendimiento",
     description: "Portátil ligera, poderosa y con batería duradera. Perfecta para trabajo o estudio."
   },
   14: {
@@ -64,8 +64,8 @@ const productosES = {
     description: "Chaqueta ligera para primavera u otoño. Combina estilo y comodidad."
   },
   17: {
-    title: "Gaban de mujer elegante",
-    description: "Gaban elegante y cálido. Perfecto para ocasiones formales o casuales."
+    title: "Gabán de mujer elegante",
+    description: "Gabán elegante y cálido. Perfecto para ocasiones formales o casuales."
   },
   18: {
     title: "Blusa de mujer con diseño delicado",
@@ -77,11 +77,11 @@ const productosES = {
   },
   20: {
     title: "Blusa, tenis y bolsa casual de mujer",
-    description: "Blusa clasica morada combinada con tenis blancos y bolsa a juego con el outfit."
+    description: "Blusa clásica morada combinada con tenis blancos y bolsa a juego con el outfit."
   }
 };
-/
-const $ = sel => document.querySelector(sel);
+
+const $ = s => document.querySelector(s);
 
 
 function iniciarLogin() {
@@ -89,7 +89,7 @@ function iniciarLogin() {
   const userInfo = $("#user-info");
   const userNameText = $("#user-name");
 
-  // Revisar si hay sesión guardada
+  // Si hay sesión guardada
   const usuarioGuardado = localStorage.getItem("usuario");
   if (usuarioGuardado) {
     loginForm.classList.add("hidden");
@@ -97,55 +97,66 @@ function iniciarLogin() {
     userNameText.textContent = usuarioGuardado;
   }
 
-  // Enviar formulario
   loginForm.addEventListener("submit", async e => {
     e.preventDefault();
 
-    // LEER CAMPOS CORRECTOS
-    const username = $("#mafe").value.trim();
-    const password = $("#1234").value.trim();
+    // IDs CORRECTOS
+    const username = $("#username").value.trim();
+    const password = $("#password").value.trim();
 
-    // Validación básica
     if (!username || !password) {
-      alert("Por favor completa todos los campos.");
+      alert("Completa ambos campos");
       return;
     }
 
     try {
-      // Petición oficial de login
       const res = await fetch("https://fakestoreapi.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: username,
-          password: password
-        })
+        body: JSON.stringify({ username, password })
       });
 
       const data = await res.json();
 
-      // Si la API no devuelve token → error real
-      if (!data.token) {
-        alert("Usuario o contraseña incorrectos.");
+      if (data && data.token) {
+        // Guardar sesión
+        localStorage.setItem("usuario", username);
+
+        loginForm.classList.add("hidden");
+        userInfo.classList.remove("hidden");
+        userNameText.textContent = username;
+
+        alert("Inicio de sesión exitoso");
         return;
       }
 
-      // Guardar sesión
-      localStorage.setItem("usuario", username);
+      // Si la API responde sin token, intentamos un fallback local (modo demo)
+      if (username === 'mor_2314' && password === '83r5^_') {
+        localStorage.setItem("usuario", username);
+        loginForm.classList.add("hidden");
+        userInfo.classList.remove("hidden");
+        userNameText.textContent = username;
+        alert("Inicio de sesión exitoso (modo demo)");
+        return;
+      }
 
-      // Actualizar interfaz
-      loginForm.classList.add("hidden");
-      userInfo.classList.remove("hidden");
-      userNameText.textContent = username;
-
-      alert("Inicio de sesión exitoso.");
+      alert("Usuario o contraseña incorrectos.");
 
     } catch (err) {
-      alert("Error al conectar con la API.");
+      // Error de red o CORS -> permitir modo demo con credenciales de ejemplo
+      if (username === 'mor_2314' && password === '83r5^_') {
+        localStorage.setItem("usuario", username);
+        loginForm.classList.add("hidden");
+        userInfo.classList.remove("hidden");
+        userNameText.textContent = username;
+        alert("Inicio de sesión exitoso (modo offline)");
+        return;
+      }
+
+      alert("Error al conectar con la API. Usa las credenciales de ejemplo: mor_2314 / 83r5^_");
     }
   });
 
-  // Cerrar sesión
   $("#logout-btn").addEventListener("click", () => {
     localStorage.removeItem("usuario");
     userInfo.classList.add("hidden");
