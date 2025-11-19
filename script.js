@@ -1,6 +1,3 @@
-// -------------------------------------------------------
-// PRODUCTOS EN ESPAÑOL
-// -------------------------------------------------------
 const productosES = {
   1: {
     title: "Maleta clásica de viaje",
@@ -83,14 +80,10 @@ const productosES = {
     description: "Blusa clasica morada combinada con tenis blancos y bolsa a juego con el outfit."
   }
 };
-//---------------------------------------------------------
-// FUNCIÓN PARA SELECCIONAR
-//---------------------------------------------------------
+/
 const $ = sel => document.querySelector(sel);
 
-//---------------------------------------------------------
-// LOGIN REAL CON API FAKESTORE
-//---------------------------------------------------------
+
 function iniciarLogin() {
   const loginForm = $("#login-form");
   const userInfo = $("#user-info");
@@ -160,9 +153,7 @@ function iniciarLogin() {
   });
 }
 
-//---------------------------------------------------------
-// CARGAR PRODUCTOS
-//---------------------------------------------------------
+
 async function cargarProductos() {
   const contenedor = $("#catalogo-productos");
 
@@ -198,9 +189,7 @@ async function cargarProductos() {
   });
 }
 
-//---------------------------------------------------------
-// CARRITO
-//---------------------------------------------------------
+
 const carrito = [];
 
 function iniciarCarrito() {
@@ -252,12 +241,11 @@ function actualizarCarrito() {
   $("#carrito-total").textContent = `Total: $${total.toFixed(2)}`;
 }
 
-//---------------------------------------------------------
-// INICIO
-//---------------------------------------------------------
+
 document.addEventListener("DOMContentLoaded", () => {
   iniciarLogin();
   cargarProductos();
   iniciarCarrito();
 });
+
 
